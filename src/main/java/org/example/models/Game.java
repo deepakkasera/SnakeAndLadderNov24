@@ -4,6 +4,7 @@ import org.example.utility.DiceUtil;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class Game {
     private Board board;
@@ -22,11 +23,15 @@ public class Game {
 
     public void start() {
         this.board.print();
+        Scanner scanner = new Scanner(System.in);
 
         while (players.size() > 1) {
             Player currentPlayer = players.poll();
 
             System.out.println("This is " + currentPlayer.getName() + "'s turn");
+
+            System.out.println("Please enter any character to roll the dice.");
+            String input = scanner.next();
 
             int dice = DiceUtil.roll(numberOfDices);
 

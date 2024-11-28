@@ -11,4 +11,9 @@ public class Ladder extends BoardEntity {
     public void printMessage() {
         System.out.println("Encountered Ladder");
     }
+
+    @Override
+    public void printEntity() {
+        System.out.print("L(" + getEnd() + ") ");
+    }
 }

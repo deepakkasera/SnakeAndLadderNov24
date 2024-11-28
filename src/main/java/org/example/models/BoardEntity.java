@@ -35,4 +35,6 @@ public abstract class BoardEntity {
     }
 
     public abstract void printMessage();
+
+    public abstract void printEntity();
 }
