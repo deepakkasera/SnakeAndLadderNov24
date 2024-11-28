@@ -1,7 +1,7 @@
 package org.example.utility;
 
 public class DiceUtil {
-    public int roll(int numberOfDices) {
+    public static int roll(int numberOfDices) {
         int sum = 0;
         for (int i = 0; i < numberOfDices; i++) {
             sum += (int) (Math.random() * 6) + 1;

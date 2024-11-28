@@ -51,7 +51,11 @@ public class Board {
 
     }
 
-    private boolean hasSnakeOrLadder(int index) {
+    public void print() {
+
+    }
+
+    public boolean hasSnakeOrLadder(int index) {
         return boardEntityMap.containsKey(index);
     }
 
@@ -69,5 +73,13 @@ public class Board {
 
     public void setBoardEntityMap(Map<Integer, BoardEntity> boardEntityMap) {
         this.boardEntityMap = boardEntityMap;
+    }
+
+    public int getCellCount() {
+        return cellCount;
+    }
+
+    public void setCellCount(int cellCount) {
+        this.cellCount = cellCount;
     }
 }

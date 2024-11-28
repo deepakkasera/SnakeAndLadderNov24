@@ -1,5 +1,7 @@
 package org.example.models;
 
+import org.example.utility.DiceUtil;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -19,7 +21,50 @@ public class Game {
     }
 
     public void start() {
+        this.board.print();
 
+        while (players.size() > 1) {
+            Player currentPlayer = players.poll();
+
+            System.out.println("This is " + currentPlayer.getName() + "'s turn");
+
+            int dice = DiceUtil.roll(numberOfDices);
+
+            System.out.println(currentPlayer.getName() + " got " + dice + " on the dice.");
+
+            int finalPosition = currentPlayer.getPosition() + dice;
+
+            if (finalPosition <= this.board.getCellCount()) {
+                //Check if there's a snake or a ladder present at finalPosition.
+                if (this.board.hasSnakeOrLadder(finalPosition)) {
+                    BoardEntity boardEntity = this.board.getBoardEntityMap().get(finalPosition);
+
+//                if (boardEntity.getBoardEntityType().equals(BoardEntityType.SNAKE)) {
+//                    System.out.println("You encountered a snake at " + finalPosition);
+//                } else {
+//                    System.out.println("You encountered a Ladder at " + finalPosition);
+//                }
+
+                    boardEntity.printMessage();
+                    finalPosition = boardEntity.getEnd();
+                }
+
+                //Change the position of the player to the final position.
+                currentPlayer.setPosition(finalPosition);
+            } else {
+                //SKIP THE MOVE
+                System.out.println("Try again, You can't go outside the board.");
+                finalPosition = currentPlayer.getPosition();
+            }
+
+            if (finalPosition == this.board.getCellCount()) {
+                //Player has WON the game.
+                System.out.println(currentPlayer.getName() + " has WON the game!!");
+                winners.add(currentPlayer);
+            } else {
+                players.add(currentPlayer);
+            }
+        }
     }
 
     public Board getBoard() {
